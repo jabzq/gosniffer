@@ -38,13 +38,13 @@ $ go build -o gosniffer.exe  # in Windows
 
 ## Usage 
 
-~bash
+```
 $ go run main.go -h google.com -p 80,21 -t 2s
-~
+```
 
-~bash
+```
 $ ./gosniffer -h google.com -p 80,21 -t 2s
-~
+```
 
 ### exemple
 
@@ -60,6 +60,4 @@ jbz@bird ~/g/GoSniffer (main) [1]> go run main.go -h kali.org -p 1-1000
 
 ## License
 
-```
 [Mit License](/LICENSE)
-```
