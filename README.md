@@ -49,7 +49,7 @@ $ ./gosniffer -h google.com -p 80,21 -t 2s
 ### exemple
 
 ```
-jbz@bird ~/g/GoSniffer (main) [1]> go run main.go -h kali.org -p 1-1000
+$ go run main.go -h kali.org -p 1-1000
 
 🔍 Scanning kali.org (Ports: 1-1000)...
 
