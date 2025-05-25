@@ -10,6 +10,17 @@ import (
 	"time"
 )
 
+func printBanner() {
+	banner := `
+   ___                _  __  __           
+  / _ \___  ___ _ __ (_)/ _|/ _| ___ _ __ 
+ / /_\/ _ \/ __| '_ \| | |_| |_ / _ \ '__|
+/ /_\\ (_) \__ \ | | | |  _|  _|  __/ |   
+\____/\___/|___/_| |_|_|_| |_|  \___|_|
+`
+	fmt.Printf("%s\n", banner)
+}
+
 // Port and service mapping
 var serviceMap = map[int]string{
 	80:   "HTTP",
@@ -18,7 +29,7 @@ var serviceMap = map[int]string{
 	22:   "SSH",
 	8080: "HTTP-Alt",
 	3306: "MySQL",
-	53: "DNS",
+	53:   "DNS",
 }
 
 func scanPort(host string, port int, timeout time.Duration, wg *sync.WaitGroup, results chan<- string) {
@@ -65,7 +76,8 @@ func parsePorts(portsFlag string) []int {
 }
 
 func main() {
-	host := flag.String("h", "example.com", "Target Host (ex: google.com)")
+	printBanner()
+	host := flag.String("u", "example.com", "Target Host (ex: google.com)")
 	portsFlag := flag.String("p", "80,443", "Ports (ex: '1-1000' or '22,80,443')")
 	timeout := flag.Duration("t", 2*time.Second, "Timeout for each connection (ex: 1s, 500ms)")
 	flag.Parse()
