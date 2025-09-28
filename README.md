@@ -2,62 +2,169 @@
 
 [![Go Version](https://img.shields.io/badge/go-%3E%3D1.20-blue.svg)](https://golang.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![Build Status](https://github.com/jbzq/Gosniffer/actions/workflows/go.yml/badge.svg)](https://github.com/jbzq/Gosniffer/actions)
-[![Codecov](https://codecov.io/gh/jbzq/GoSniffer/branch/main/graph/badge.svg)](https://codecov.io/gh/jbzq/Gosniffer)
-[![Go Report Card](https://goreportcard.com/badge/github.com/jbzq/Gosniffer)](https://goreportcard.com/report/github.com/jbzq/Gosniffer)
-[![Release](https://img.shields.io/github/v/release/jbxq/Gosniffer)](https://github.com/jbzq/Gosniffer/releases)
+[![Build Status](https://github.com/jabzq/Gosniffer/actions/workflows/go.yml/badge.svg)](https://github.com/jabzq/Gosniffer/actions)
+[![Codecov](https://codecov.io/gh/jabzq/GoSniffer/branch/main/graph/badge.svg)](https://codecov.io/gh/jabzq/GoSniffer)
+[![Go Report Card](https://goreportcard.com/badge/github.com/jabzq/Gosniffer)](https://goreportcard.com/report/github.com/jabzq/Gosniffer)
+[![Release](https://img.shields.io/github/v/release/jabzq/Gosniffer)](https://github.com/jabzq/Gosniffer/releases)
 
 > [!NOTE]
->
-> Still in the testing phase, 
-> only ports 80, 443, 3306, 21, 22, 8080, and 53 are recognized, 
-> contributions are welcome
->
+> 
+> **Now with Advanced Features!** 🚀
+> GoSniffer has evolved into a comprehensive network scanning tool with enhanced capabilities while maintaining its lightweight nature.
 
-## Features 
+## 🆕 New Features
+
+### 🔍 Advanced Service Detection
+- **Enhanced Banner Grabbing**: Automatically retrieves service banners and headers
+- **Smart Service Recognition**: Detects specific server technologies (Apache, Nginx, CloudFront, etc.)
+- **Extended Port Support**: Now recognizes 25+ common services including SMTP, POP3, IMAP, RDP, PostgreSQL, MongoDB, and more
+
+### 🛡️ Security Analysis
+- **Vulnerability Assessment**: Basic security checks for common misconfigurations
+- **Risk Identification**: Flags potentially vulnerable services and configurations
+- **Security Recommendations**: Provides actionable security insights
+
+### 💻 OS Detection
+- **Operating System Fingerprinting**: Identifies remote OS types with accuracy estimation
+- **TTL-based Analysis**: Uses network characteristics for OS detection
+- **Windows/Linux/BSD Recognition**: Distinguishes between major OS families
+
+### ⚡ Performance & Usability
+- **Modular Architecture**: Clean, maintainable codebase with separate components
+- **Enhanced Output Formatting**: Color-coded results with hierarchical information
+- **Fast Concurrent Scanning**: Optimized goroutines for maximum performance
+
+## Features
 - **Concurrent scanning** (uses goroutines for speed)
-- **Service detection** (HTTP, SSH, FTP, etc.)
-- **Lightweight** (single binary, no dependencies)
+- **Advanced service detection** (HTTP, SSH, FTP, SMTP, RDP, Databases, etc.)
+- **Banner grabbing** and service fingerprinting
+- **Basic vulnerability assessment**
+- **OS detection** with accuracy estimation
+- **Lightweight** (single binary, minimal dependencies)
+- **Colorful, formatted output** for easy reading
 
-## Instalation
+## Installation
 
-### Using go
-
-```
-$ go install github.com/jbzq/Gosniffer@latest
-```
-
-### Using git
-
-```
-$ git clone https://github.com/jbzq/Gosniffer.git
-$ cd git
-$ go build -o gosniffer main.go  # in Unix/Mac
-$ go build -o gosniffer.exe  # in Windows
+### Using Go
+```bash
+go install github.com/jabzq/Gosniffer@latest
 ```
 
-## Usage 
-
-```
-$ go run main.go -h google.com -p 80,21 -t 2s
-```
-
-```
-$ ./gosniffer -h google.com -p 80,21 -t 2s
+### Using Git 
+```bash
+git clone https://github.com/jabzq/Gosniffer.git
+cd Gosniffer
+go build -o gosniffer main.go        # Unix/Linux/Mac
+go build -o gosniffer.exe            # Windows
 ```
 
-### exemple
+### Usage
 
+#### Basic scan
+```bash
+go run main.go -h google.com -p 80,443 -t 2s
 ```
+
+#### Advanced Scan with All Features
+```bash
+./gosniffer -h target.com -p 1-1000 -b -v -os
+```
+
+#### Full Port Range with Security Checks
+```bash
+./gosniffer -h example.com -p 21,22,23,25,53,80,110,143,443,993,995,3389 -b -v -os
+```
+
+### Examples
+
+#### Basic Service Detection
+```bash
 $ go run main.go -h kali.org -p 1-1000
 
 🔍 Scanning kali.org (Ports: 1-1000)...
 
 [+] Port 80 open (HTTP)
-[+] Port 53 open (DNS)
+[+] Port 53 open (DNS) 
 [+] Port 443 open (HTTPS)
 ```
 
+#### Advanced Scan with All Features
+```bash
+$ ./gosniffer -h uol.com -p 80,443 -b -v -os
+
+🔍 Scanning uol.com (Ports: 80,443)...
+📊 Mode: connect | Banner: true | VulnCheck: true | OS Detection: true
+
+[+] Port 80 open (HTTP Server)
+    └── Banner: HTTP/1.1 301 Moved Permanently | Server: CloudFront | Date: ...
+    └── OS: Windows (70% accuracy)
+    └── Vulnerabilities: Web scan recommended (directories, technologies)
+[+] Port 443 open (HTTP Server)
+    └── Banner: HTTP/1.1 400 Bad Request | Server: CloudFront | Date: ...
+    └── OS: Windows (70% accuracy)
+    └── Vulnerabilities: Web scan recommended (directories, technologies)
+
+📈 Scan completed in 227ms
+📊 2 ports scanned, 2 open ports found
+```
+
+## Command Line Options
+
+| Flag | Description | Default |
+|------|-------------|---------|
+| `-h` | Target hostname or IP address | `example.com` |
+| `-p` | Ports to scan (comma-separated or range) | `80,443` |
+| `-t` | Timeout for each connection | `2s` |
+| `-b` | Enable banner grabbing | `false` |
+| `-v` | Enable vulnerability checks | `false` |
+| `-os` | Enable OS detection | `false` |
+| `-s` | Scan type (connect, syn) | `connect` |
+| `-o` | Output format (text, json) | `text` |
+
+## Supported Services
+
+The scanner now recognizes services on these common ports:
+
+- **Web Services**: 80 (HTTP), 443 (HTTPS), 8080 (HTTP-Alt), 8443 (HTTPS-Alt)
+- **Email**: 25 (SMTP), 110 (POP3), 143 (IMAP), 993 (IMAPS), 995 (POP3S)
+- **Remote Access**: 22 (SSH), 3389 (RDP)
+- **File Transfer**: 21 (FTP)
+- **Databases**: 3306 (MySQL), 5432 (PostgreSQL), 27017 (MongoDB), 6379 (Redis)
+- **Network Services**: 53 (DNS)
+- **And many more...**
+
+## Project Structure
+
+```bash
+GoSniffer/
+├── main.go # CLI interface and coordination
+├── config/
+│ └── config.go # Configuration structures and service mappings
+├── scanner/
+│ ├── scanner.go # Main scanning logic
+│ ├── port_parser.go # Port range parsing
+│ ├── banner.go # Banner grabbing functionality
+│ ├── vulnerabilities.go # Security checks
+│ └── os_detection.go # OS fingerprinting
+└── go.mod # dependencies
+```
+
+## Contributing
+
+We welcome contributions! The project is actively developed and these features are planned:
+
+- [ ] Raw socket implementation for accurate OS detection
+- [ ] JSON output format for integration with other tools
+- [ ] Web interface version
+- [ ] Distributed scanning capabilities
+- [ ] Additional protocol support
+
+Please feel free to submit issues and pull requests!
+
 ## License
 
-[Mit License](/LICENSE)
+[MIT License](/LICENSE)
+
+---
+
+**GoSniffer** - Fast, lightweight, and powerful port scanner written in Go. Perfect for network reconnaissance and security assessments.
