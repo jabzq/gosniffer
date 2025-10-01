@@ -12,36 +12,6 @@
 > **Now with Advanced Features!** 🚀
 > GoSniffer has evolved into a comprehensive network scanning tool with enhanced capabilities while maintaining its lightweight nature.
 
-## 🆕 New Features
-
-### 🔍 Advanced Service Detection
-- **Enhanced Banner Grabbing**: Automatically retrieves service banners and headers
-- **Smart Service Recognition**: Detects specific server technologies (Apache, Nginx, CloudFront, etc.)
-- **Extended Port Support**: Now recognizes 25+ common services including SMTP, POP3, IMAP, RDP, PostgreSQL, MongoDB, and more
-
-### 🛡️ Security Analysis
-- **Vulnerability Assessment**: Basic security checks for common misconfigurations
-- **Risk Identification**: Flags potentially vulnerable services and configurations
-- **Security Recommendations**: Provides actionable security insights
-
-### 💻 OS Detection
-- **Operating System Fingerprinting**: Identifies remote OS types with accuracy estimation
-- **TTL-based Analysis**: Uses network characteristics for OS detection
-- **Windows/Linux/BSD Recognition**: Distinguishes between major OS families
-
-### ⚡ Performance & Usability
-- **Modular Architecture**: Clean, maintainable codebase with separate components
-- **Enhanced Output Formatting**: Color-coded results with hierarchical information
-- **Fast Concurrent Scanning**: Optimized goroutines for maximum performance
-
-## Features
-- **Concurrent scanning** (uses goroutines for speed)
-- **Advanced service detection** (HTTP, SSH, FTP, SMTP, RDP, Databases, etc.)
-- **Banner grabbing** and service fingerprinting
-- **Basic vulnerability assessment**
-- **OS detection** with accuracy estimation
-- **Lightweight** (single binary, minimal dependencies)
-- **Colorful, formatted output** for easy reading
 
 ## Installation
 
@@ -81,7 +51,7 @@ go run main.go -h google.com -p 80,443 -t 2s
 ```bash
 $ go run main.go -h kali.org -p 1-1000
 
-🔍 Scanning kali.org (Ports: 1-1000)...
+Scanning kali.org (Ports: 1-1000)...
 
 [+] Port 80 open (HTTP)
 [+] Port 53 open (DNS) 
@@ -92,8 +62,8 @@ $ go run main.go -h kali.org -p 1-1000
 ```bash
 $ ./gosniffer -h uol.com -p 80,443 -b -v -os
 
-🔍 Scanning uol.com (Ports: 80,443)...
-📊 Mode: connect | Banner: true | VulnCheck: true | OS Detection: true
+Scanning uol.com (Ports: 80,443)...
+Mode: connect | Banner: true | VulnCheck: true | OS Detection: true
 
 [+] Port 80 open (HTTP Server)
     └── Banner: HTTP/1.1 301 Moved Permanently | Server: CloudFront | Date: ...
@@ -104,8 +74,8 @@ $ ./gosniffer -h uol.com -p 80,443 -b -v -os
     └── OS: Windows (70% accuracy)
     └── Vulnerabilities: Web scan recommended (directories, technologies)
 
-📈 Scan completed in 227ms
-📊 2 ports scanned, 2 open ports found
+Scan completed in 227ms
+2 ports scanned, 2 open ports found
 ```
 
 ## Command Line Options

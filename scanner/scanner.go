@@ -16,8 +16,8 @@ func RunScan(scanConfig config.ScanConfig) []string {
 	var wg sync.WaitGroup
 	resultChan := make(chan string)
 
-	fmt.Printf("\n🔍 Scanning %s (Ports: %s)...\n", scanConfig.Host, scanConfig.Ports)
-	fmt.Printf("📊 Mode: %s | Banner: %v | VulnCheck: %v | OS Detection: %v\n\n",
+	fmt.Printf("\nScanning %s (Ports: %s)...\n", scanConfig.Host, scanConfig.Ports)
+	fmt.Printf("Mode: %s | Banner: %v | VulnCheck: %v | OS Detection: %v\n\n",
 		scanConfig.ScanType, scanConfig.Banner, scanConfig.VulnCheck, scanConfig.OSDetection)
 
 	startTime := time.Now()
@@ -40,8 +40,8 @@ func RunScan(scanConfig config.ScanConfig) []string {
 	}
 
 	duration := time.Since(startTime)
-	stats := fmt.Sprintf("\n📈 Scan completed in %v\n", duration)
-	stats += fmt.Sprintf("📊 %d ports scanned, %d open ports found\n", len(ports), openPorts)
+	stats := fmt.Sprintf("\nScan completed in %v\n", duration)
+	stats += fmt.Sprintf("%d ports scanned, %d open ports found\n", len(ports), openPorts)
 
 	results = append(results, stats)
 	fmt.Println(stats)
