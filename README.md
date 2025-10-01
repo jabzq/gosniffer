@@ -2,10 +2,7 @@
 
 [![Go Version](https://img.shields.io/badge/go-%3E%3D1.20-blue.svg)](https://golang.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![Build Status](https://github.com/jabzq/Gosniffer/actions/workflows/go.yml/badge.svg)](https://github.com/jabzq/Gosniffer/actions)
-[![Codecov](https://codecov.io/gh/jabzq/GoSniffer/branch/main/graph/badge.svg)](https://codecov.io/gh/jabzq/GoSniffer)
 [![Go Report Card](https://goreportcard.com/badge/github.com/jabzq/Gosniffer)](https://goreportcard.com/report/github.com/jabzq/Gosniffer)
-[![Release](https://img.shields.io/github/v/release/jabzq/Gosniffer)](https://github.com/jabzq/Gosniffer/releases)
 
 > [!NOTE]
 > 
